@@ -3,7 +3,7 @@
 (* This file is part of the Interproc analyzer, released under GPL license.
    Please read the COPYING file packaged in the distribution.
 
-   Copyright (C) Mathias Argoud, Gaël Lalire, Bertrand Jeannet 2007.
+   Copyright (C) Mathias Argoud, Gaï¿½l Lalire, Bertrand Jeannet 2007.
 *)
 
 open Format
@@ -97,6 +97,8 @@ type 'a instruction =
   | FAIL
     (** Halt the execution, but also indicate a final point for backward
 	analysis *)
+  | FLUSH
+  	(** Flush all the remote pending operations triggered by this process *)
   | ASSUME of 'a Bddapron.Syntax.expr
     (** Semantically equivalent to [if expr then skip; else halt;] *)
   | ASSIGN of ('a list) * ('a Bddapron.Syntax.expr option list)
@@ -469,6 +471,7 @@ let rec iter_block f decl block
 	| SKIP
 	| HALT
 	| FAIL
+ 	| FLUSH
 	| ASSUME _
 	| ASSIGN _
 	| GOTO _
@@ -505,6 +508,7 @@ let rec instruction_substitute ~env ~name ~point ~scope = function
   | SKIP -> SKIP
   | HALT -> HALT
   | FAIL -> FAIL
+  | FLUSH -> FLUSH
   | GOTO(Pos(pos,tab)) -> GOTO(Pos(pos,(point tab)))
   | GOTO(Lab(s,tab,b)) -> GOTO(Lab(s,(point tab),b))
   | GOTO(Push _) -> failwith ""
@@ -674,6 +678,8 @@ let rec print_instruction print_var print_comment fmt instruction =
       pp_print_string fmt "halt;"
   | FAIL ->
       pp_print_string fmt "fail;"
+  | FLUSH ->
+      pp_print_string fmt "flush;"
   | ASSUME(expr) ->
       fprintf fmt "assume %a;"
 	(Bddapron.Syntax.print_expr print_var) expr

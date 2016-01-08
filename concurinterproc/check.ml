@@ -170,6 +170,7 @@ let rec instruction
   | SKIP -> SKIP
   | HALT -> HALT
   | FAIL -> FAIL
+  | FLUSH -> FLUSH
   | GOTO(Lab(s,tab,b)) ->
       assert(tab=[||] && b);
       if Sette.mem s clabel then GOTO(Lab(s,tab,b))

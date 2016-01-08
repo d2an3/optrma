@@ -1,7 +1,7 @@
 /* This file is part of the Interproc analyzer, released under GPL license.
    Please read the COPYING file packaged in the distribution.
 
-   Copyright (C) Mathias Argoud, Gaël Lalire, Bertrand Jeannet 2007.
+   Copyright (C) Mathias Argoud, Gaï¿½l Lalire, Bertrand Jeannet 2007.
 */
 
 %{
@@ -17,7 +17,7 @@ let pos_minus_begin pos =
 %}
 
 /* tokens */
-%token TK_BOOL TK_UINT TK_SINT TK_IN TK_LPAR TK_RPAR TK_LBRACE TK_RBRACE TK_LBRACKET TK_RBRACKET TK_RANDOM TK_ASSUME TK_HALT TK_FAIL TK_VAR TK_DONE TK_ENDIF TK_SKIP TK_YIELD TK_INITIAL TK_INLINE TK_ATOMIC
+%token TK_BOOL TK_UINT TK_SINT TK_IN TK_LPAR TK_RPAR TK_LBRACE TK_RBRACE TK_LBRACKET TK_RBRACKET TK_RANDOM TK_ASSUME TK_HALT TK_FAIL TK_VAR TK_DONE TK_ENDIF TK_SKIP TK_YIELD TK_INITIAL TK_INLINE TK_ATOMIC TK_FLUSH
 %token TK_TYPEDEF TK_ENUM TK_PROC TK_THREAD TK_WHILE TK_IF TK_GOTO
 %token <(Apron.Texpr1.typ * Apron.Texpr1.round)> TK_MUL
 %token <(Apron.Texpr1.typ * Apron.Texpr1.round)> TK_ADD
@@ -173,7 +173,9 @@ TK_END { Pos($1,[||]) }
 
 instruction:
   TK_YIELD
-      { YIELD }
+    { YIELD }
+  | TK_FLUSH
+    { FLUSH }
 | TK_SKIP
       { SKIP }
 | TK_HALT

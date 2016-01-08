@@ -67,6 +67,7 @@ let rec map_instr
       | SKIP
       | HALT
       | FAIL
+      | FLUSH
       | ASSUME _
       | ASSIGN _
       | GOTO _

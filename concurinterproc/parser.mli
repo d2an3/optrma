@@ -21,6 +21,7 @@ type token =
   | TK_INITIAL
   | TK_INLINE
   | TK_ATOMIC
+  | TK_FLUSH
   | TK_TYPEDEF
   | TK_ENUM
   | TK_PROC

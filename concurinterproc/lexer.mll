@@ -15,7 +15,7 @@ let _ =
     (fun (keyword,token) -> Hashtbl.add keywords keyword token)
     [|
       ("initial", TK_INITIAL);
-      ("yield", TK_YIELD);
+      ("yield", TK_YIELD); 
       ("typedef", TK_TYPEDEF);
       ("enum", TK_ENUM);
       ("proc", TK_PROC);
@@ -45,6 +45,7 @@ let _ =
       ("goto", TK_GOTO);
       ("inline", TK_INLINE);
       ("atomic", TK_ATOMIC);
+      ("flush", TK_FLUSH);
     |]
 
 let newline (lexbuf:Lexing.lexbuf) : unit

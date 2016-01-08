@@ -104,6 +104,7 @@ let procedure_expanse
     | SKIP
     | HALT
     | FAIL
+    | FLUSH
     | ASSUME _
     | ASSIGN _
     | GOTO _ -> instruction

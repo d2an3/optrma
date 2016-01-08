@@ -75,6 +75,8 @@ and cfg_of_instr ~scheduling cfg tname pname env point (instr:Syntax.var Syntax.
       ()
   | FAIL ->
       PSHGraph.replace_attrvertex cfg point `Fail;
+  | FLUSH ->
+    add_edge point (Cfg. Condition Syntax.etrue) ipoint
   | ASSUME(expr) ->
       add_edge point (Cfg.Condition expr) ipoint
   | ASSIGN(lvar,loexpr) ->

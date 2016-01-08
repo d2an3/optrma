@@ -63,6 +63,8 @@ type 'a instruction =
   | FAIL
     (** Halt the execution, but also indicate a final point for backward
 	analysis *)
+  | FLUSH
+  	(** Flush all the remote pending operations triggered by this process *)
   | ASSUME of 'a Bddapron.Syntax.expr
     (** Semantically equivalent to [if expr then skip; else halt;] *)
   | ASSIGN of ('a list) * ('a Bddapron.Syntax.expr option list)
